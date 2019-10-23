@@ -71,7 +71,7 @@ assert params.dico_max_size == 0 or params.dico_max_size < params.dico_max_rank
 assert params.dico_max_size == 0 or params.dico_max_size > params.dico_min_size
 assert os.path.isfile(params.src_emb)
 assert all(os.path.isfile(emb) for emb in params.tgt_emb)
-assert params.dico_eval == 'default' or os.path.isfile(params.dico_eval)
+#assert params.dico_eval == 'default' or os.path.isfile(params.dico_eval)
 assert params.export in ["", "txt", "pth"]
 assert len(params.tgt_lang) == len(params.tgt_emb)
 assert len(params.tgt_lang) == 1 or params.generalized

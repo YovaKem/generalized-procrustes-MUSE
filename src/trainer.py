@@ -138,9 +138,8 @@ class Trainer(object):
         """
         dico = {}
         dico_inbn = {}
-
+      
         word2id1 = self.src_dico.word2id
-
         for lang in self.params.tgt_lang:
             word2id2 = self.tgt_dico[lang].word2id
 
@@ -152,8 +151,8 @@ class Trainer(object):
                 dico[lang] = load_identical_num_dico(word2id1, word2id2, True)
             # use one of the provided dictionary
             elif dico_train == "default":
-                filename = '%s-%s.0-5000.txt' % (self.params.src_lang, self.params.tgt_lang)
-                dico[lang] = load_dictionary(
+                filename = '%s-%s.0-5000.txt' % (self.params.src_lang, lang)
+                dico[lang], _ = load_dictionary(
                     os.path.join(DIC_EVAL_PATH, filename),
                     word2id1, word2id2, True
                 )

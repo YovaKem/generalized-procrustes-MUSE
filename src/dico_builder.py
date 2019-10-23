@@ -148,7 +148,6 @@ def build_pairwise_dictionary(src_emb, tgt_emb, params, s2t_candidates=None, t2s
     s2t = 'S2T' in params.dico_build
     t2s = 'T2S' in params.dico_build
     assert s2t or t2s
-
     if s2t:
         if s2t_candidates is None:
             s2t_candidates = get_candidates(src_emb, tgt_emb, params)
@@ -162,8 +161,8 @@ def build_pairwise_dictionary(src_emb, tgt_emb, params, s2t_candidates=None, t2s
     elif params.dico_build == 'T2S':
         dico = t2s_candidates
     else:
-        s2t_candidates = set([(a, b) for a, b in s2t_candidates])
-        t2s_candidates = set([(a, b) for a, b in t2s_candidates])
+        s2t_candidates = set([(a, b) for a, b in s2t_candidates.numpy()])
+        t2s_candidates = set([(a, b) for a, b in t2s_candidates.numpy()])
         if params.dico_build == 'S2T|T2S':
             final_pairs = s2t_candidates | t2s_candidates
         else:
@@ -183,7 +182,6 @@ def build_pairwise_dictionary(src_emb, tgt_emb, params, s2t_candidates=None, t2s
 
 def cross_match_dictionary(lang_list, dico, dico_inbn, params):
     final_dico = []
-
     for row in dico[lang_list[0]]:#iterate over candidate pairs in one dico and check if they exist in others
         src_word=row[0]
         if all([src_word in dico[lang][:,0] for lang in lang_list]):

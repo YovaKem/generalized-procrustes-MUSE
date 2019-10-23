@@ -209,7 +209,7 @@ class Evaluator(object):
                 mean=mean_cosine
                 logger.info("Mean cosine (%s method, %s build, %i max size): %.5f"
                             % (dico_method, _params.dico_build, dico_max_size, mean))
-                to_log['mean_cosine-%s-%s-%i_%s' % (dico_method, _params.dico_build, dico_max_size,lang)] = mean
+                to_log['mean_cosine-%s-%s-%i_%s' % (dico_method, _params.dico_build, dico_max_size,lang)] = np.asscalar(mean.cpu().numpy())
 
     def all_eval(self, to_log, biling_dict):
         """
