@@ -1,15 +1,20 @@
 ## Preface
-This repo implements Generalized Procrustes Analysis for (weakly) supervised bilingual dictionary induction over the original MUSE implementation (https://github.com/facebookresearch/MUSE). The approach is described in 
+This repo implements Generalized Procrustes Analysis for (weakly) supervised bilingual dictionary induction over the [original MUSE implementation](https://github.com/facebookresearch/MUSE). The approach is described in 
 
-#### Yova Kementchedjhieva, Sebastian Ruder, Ryan Cotterell and Anders Søgaard. Generalizing Procrustes Analysis for Better Bilingual Dictionary Induction. CoNLL. 2018.
+#### Yova Kementchedjhieva, Sebastian Ruder, Ryan Cotterell and Anders Søgaard. [Generalizing Procrustes Analysis for Better Bilingual Dictionary Induction](https://www.aclweb.org/anthology/K18-1021/). CoNLL. 2018.
 
 To use GPA, set `--generalized True` in *supervised.py*, and feed the languages as follows: set `--src_lang` and `--src_emb` to the name of and path to the main source language; set `--tgt_lang` and `--tgt_emb` to all other languages to be trained on, with the main target language coming last (format the list as a space-separated string). Example command for training EN to OC with support from ES: 
 
 ```bash
-python supervised.py --src_lang en --tgt_lang "es oc" --src_emb data/wiki.en.vec --tgt_emb "data/wiki.es.vec data/wiki.oc.vec" --generalized True --n_refinement 5 --dico_train default
+python supervised.py --src_lang en --tgt_lang "de af" --src_emb data/wiki.en.vec --tgt_emb "data/wiki.de.vec data/wiki.af.vec" --generalized True --n_refinement 10 --dico_train identical_char --dico_max_rank 15000
 ```
 
 With `--generalized False`, simple Procrustes Analysis runs, as originally implemented in the code.
+
+## Requirements
+
+PyTorch 0.4
+
 
 Below is the original README for MUSE.
 
