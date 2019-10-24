@@ -171,7 +171,8 @@ def build_pairwise_dictionary(src_emb, tgt_emb, params, s2t_candidates=None, t2s
             if len(final_pairs) == 0:
                 logger.warning("Empty intersection ...")
                 return None
-        dico = list([[a, b] for (a, b) in final_pairs])
+        dico = list([[int(a), int(b)] for (a, b) in final_pairs])
+        #dico = list([[a, b] for (a, b) in final_pairs])
 
     logger.info('New train dictionary of %i pairs.' % len(dico))
     if return_tensor:

@@ -168,15 +168,14 @@ def get_word_translation_accuracy(lang1, word2id1, emb1, lang2, word2id2, emb2, 
 
     results = []
     top_matches = scores.topk(100, 1, True)[1]
-
     for k in [1, 5, 10]:
         top_k_matches = top_matches[:, :k]
 
-        _matching = (top_k_matches == dico[:, 1][:, None].expand_as(top_k_matches)).sum(1)
+        _matching = (top_k_matches == dico[:, 1][:, None].expand_as(top_k_matches)).sum(1).cpu().numpy()
         # allow for multiple possible translations
         matching = {}
 
-        for i, src_id in enumerate(dico[:, 0]):
+        for i, src_id in enumerate(dico[:, 0].cpu().numpy()):
             matching[src_id] = min(matching.get(src_id, 0) + _matching[i], 1)
 
         # evaluate precision@k

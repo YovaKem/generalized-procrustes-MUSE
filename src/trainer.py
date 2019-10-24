@@ -202,7 +202,7 @@ class Trainer(object):
         X = {lang: self.tgt_emb[lang].weight.data[self.dico[:, i]] for i,lang in enumerate(lang_list,1)}
         X[self.params.src_lang] = self.src_emb.weight.data[self.dico[:,0]]
         T = {lang: self.mapping[lang].weight.data for lang in [self.params.src_lang]+lang_list}
-        for _ in range(100):
+        for _ in range(500):
             if initial_run:
                 #initialize group average with a random Language
                 G = X[self.params.tgt_lang[0]]
